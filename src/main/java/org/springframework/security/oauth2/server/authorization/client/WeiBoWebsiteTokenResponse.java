@@ -9,9 +9,9 @@ package org.springframework.security.oauth2.server.authorization.client;
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -33,8 +33,8 @@ import java.util.List;
  *
  * @author xuxiaowei
  * @since 0.0.1
- * 
- * 
+ *
+ *
  */
 @Data
 public class WeiBoWebsiteTokenResponse implements Serializable {
@@ -481,6 +481,11 @@ public class WeiBoWebsiteTokenResponse implements Serializable {
 		@JsonProperty("verified_reason_modified")
 		private String verifiedReasonModified;
 
+		private Integer block;
+
+		@JsonProperty("block_me")
+		private Integer blockMe;
+
 	}
 
 	@Data
@@ -537,6 +542,22 @@ public class WeiBoWebsiteTokenResponse implements Serializable {
 	 */
 	@Data
 	public static class Status {
+
+		/**
+		 *
+		 */
+		private Integer version;
+
+		/**
+		 *
+		 */
+		private String picStatus;
+
+		/**
+		 *
+		 */
+		@JsonProperty("show_mlevel")
+		private Integer showMlevel;
 
 		/**
 		 * 微博创建时间
