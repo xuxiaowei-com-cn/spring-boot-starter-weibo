@@ -100,7 +100,7 @@ public class OAuth2WeiBoWebsiteAuthenticationToken extends OAuth2AuthorizationGr
 			Map<String, Object> additionalParameters, String appid, String redirectUri, String code, String scope,
 			String remoteAddress, String sessionId, String state, String binding) {
 		super(OAuth2WeiBoWebsiteAuthenticationToken.WEIBO_WEBSITE, clientPrincipal, additionalParameters);
-		Assert.hasText(code, "appid 不能为空");
+		Assert.hasText(appid, "appid 不能为空");
 		Assert.hasText(redirectUri, "redirectUri 不能为空");
 		Assert.hasText(code, "code 不能为空");
 		this.appid = appid;
