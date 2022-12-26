@@ -9,9 +9,9 @@ package org.springframework.security.oauth2.server.authorization.authentication;
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -100,7 +100,7 @@ public class OAuth2WeiBoWebsiteAuthenticationToken extends OAuth2AuthorizationGr
 			Map<String, Object> additionalParameters, String appid, String redirectUri, String code, String scope,
 			String remoteAddress, String sessionId, String state, String binding) {
 		super(OAuth2WeiBoWebsiteAuthenticationToken.WEIBO_WEBSITE, clientPrincipal, additionalParameters);
-		Assert.hasText(code, "appid 不能为空");
+		Assert.hasText(appid, "appid 不能为空");
 		Assert.hasText(redirectUri, "redirectUri 不能为空");
 		Assert.hasText(code, "code 不能为空");
 		this.appid = appid;
