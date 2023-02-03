@@ -101,8 +101,9 @@ public class OAuth2WeiBoWebsiteAuthenticationConverter implements Authentication
 		parameters.forEach((key, value) -> {
 			if (!key.equals(OAuth2ParameterNames.GRANT_TYPE) && !key.equals(OAuth2ParameterNames.CLIENT_ID)
 					&& !key.equals(OAuth2ParameterNames.CODE) && !key.equals(OAuth2ParameterNames.REDIRECT_URI)
-					&& !key.equals(OAuth2ParameterNames.CLIENT_SECRET) && !key.equals(OAuth2WeiBoWebsiteParameterNames.APPID)
-					&& !key.equals(OAuth2ParameterNames.SCOPE) && !OAuth2WeiBoWebsiteParameterNames.REMOTE_ADDRESS.equals(key)
+					&& !key.equals(OAuth2ParameterNames.CLIENT_SECRET)
+					&& !key.equals(OAuth2WeiBoWebsiteParameterNames.APPID) && !key.equals(OAuth2ParameterNames.SCOPE)
+					&& !OAuth2WeiBoWebsiteParameterNames.REMOTE_ADDRESS.equals(key)
 					&& !OAuth2WeiBoWebsiteParameterNames.SESSION_ID.equals(key)
 					&& !OAuth2WeiBoWebsiteParameterNames.BINDING.equals(key)) {
 				additionalParameters.put(key, value.get(0));
