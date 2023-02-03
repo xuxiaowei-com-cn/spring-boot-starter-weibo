@@ -45,13 +45,13 @@ import org.springframework.security.oauth2.core.OAuth2AuthenticationException;
 import org.springframework.security.oauth2.core.OAuth2Error;
 import org.springframework.security.oauth2.core.endpoint.OAuth2AccessTokenResponse;
 import org.springframework.security.oauth2.core.endpoint.OAuth2ParameterNames;
-import org.springframework.security.oauth2.core.endpoint.OAuth2WeiBoParameterNames;
+import org.springframework.security.oauth2.core.endpoint.OAuth2WeiBoWebsiteParameterNames;
 import org.springframework.security.oauth2.core.http.converter.OAuth2AccessTokenResponseHttpMessageConverter;
 import org.springframework.security.oauth2.server.authorization.config.annotation.web.configurers.OAuth2AuthorizationServerConfigurer;
 import org.springframework.security.oauth2.server.authorization.config.annotation.web.configurers.OAuth2TokenEndpointConfigurer;
-import org.springframework.security.oauth2.server.authorization.exception.AppidWeiBoException;
-import org.springframework.security.oauth2.server.authorization.exception.RedirectUriWeiBoException;
-import org.springframework.security.oauth2.server.authorization.exception.RedirectWeiBoException;
+import org.springframework.security.oauth2.server.authorization.exception.AppidWeiBoWebsiteException;
+import org.springframework.security.oauth2.server.authorization.exception.RedirectUriWeiBoWebsiteException;
+import org.springframework.security.oauth2.server.authorization.exception.RedirectWeiBoWebsiteException;
 import org.springframework.security.oauth2.server.authorization.properties.WeiBoWebsiteProperties;
 import org.springframework.security.oauth2.server.authorization.web.authentication.OAuth2WeiBoWebsiteEndpointUtils;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
@@ -97,7 +97,7 @@ public class InMemoryWeiBoWebsiteService implements WeiBoWebsiteService {
 		}
 		else {
 			OAuth2Error error = new OAuth2Error(OAuth2WeiBoWebsiteEndpointUtils.ERROR_CODE, "重定向地址前缀不能为空", null);
-			throw new RedirectUriWeiBoException(error);
+			throw new RedirectUriWeiBoWebsiteException(error);
 		}
 	}
 
@@ -186,7 +186,7 @@ public class InMemoryWeiBoWebsiteService implements WeiBoWebsiteService {
 		List<WeiBoWebsiteProperties.WeiBoWebsite> list = weiBoWebsiteProperties.getList();
 		if (list == null) {
 			OAuth2Error error = new OAuth2Error(OAuth2WeiBoWebsiteEndpointUtils.ERROR_CODE, "appid 未配置", null);
-			throw new AppidWeiBoException(error);
+			throw new AppidWeiBoWebsiteException(error);
 		}
 
 		for (WeiBoWebsiteProperties.WeiBoWebsite weiBoWebsite : list) {
@@ -195,7 +195,7 @@ public class InMemoryWeiBoWebsiteService implements WeiBoWebsiteService {
 			}
 		}
 		OAuth2Error error = new OAuth2Error(OAuth2WeiBoWebsiteEndpointUtils.ERROR_CODE, "未匹配到 appid", null);
-		throw new AppidWeiBoException(error);
+		throw new AppidWeiBoWebsiteException(error);
 	}
 
 	/**
@@ -298,7 +298,7 @@ public class InMemoryWeiBoWebsiteService implements WeiBoWebsiteService {
 
 		Map<String, String> map = new HashMap<>(4);
 		map.put(OAuth2ParameterNames.ACCESS_TOKEN, accessToken);
-		map.put(OAuth2WeiBoParameterNames.UID, uid);
+		map.put(OAuth2WeiBoWebsiteParameterNames.UID, uid);
 		String string = restTemplate.getForObject(userinfoUrl, String.class, map);
 		try {
 			WeiBoWebsiteTokenResponse.UserInfo userInfo = objectMapper.readValue(string,
@@ -376,7 +376,7 @@ public class InMemoryWeiBoWebsiteService implements WeiBoWebsiteService {
 		}
 		catch (IOException e) {
 			OAuth2Error error = new OAuth2Error(OAuth2WeiBoWebsiteEndpointUtils.ERROR_CODE, "微博开放平台 网站应用重定向异常", null);
-			throw new RedirectWeiBoException(error, e);
+			throw new RedirectWeiBoWebsiteException(error, e);
 		}
 
 	}

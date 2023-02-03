@@ -9,9 +9,9 @@ package org.springframework.security.oauth2.server.authorization.http;
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -30,7 +30,7 @@ import lombok.EqualsAndHashCode;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.oauth2.core.endpoint.OAuth2ParameterNames;
-import org.springframework.security.oauth2.core.endpoint.OAuth2WeiBoParameterNames;
+import org.springframework.security.oauth2.core.endpoint.OAuth2WeiBoWebsiteParameterNames;
 import org.springframework.security.oauth2.server.authorization.client.WeiBoWebsiteService;
 import org.springframework.security.oauth2.server.authorization.properties.WeiBoWebsiteProperties;
 import org.springframework.stereotype.Component;
@@ -88,11 +88,11 @@ public class WeiBoWebsiteAuthorizeHttpFilter extends HttpFilter {
 
 			String redirectUri = weiBoWebsiteService.getRedirectUriByAppid(appid);
 
-			String binding = request.getParameter(OAuth2WeiBoParameterNames.BINDING);
+			String binding = request.getParameter(OAuth2WeiBoWebsiteParameterNames.BINDING);
 			String scope = request.getParameter(OAuth2ParameterNames.SCOPE);
-			String display = request.getParameter(OAuth2WeiBoParameterNames.DISPLAY);
-			String forcelogin = request.getParameter(OAuth2WeiBoParameterNames.FORCELOGIN);
-			String language = request.getParameter(OAuth2WeiBoParameterNames.LANGUAGE);
+			String display = request.getParameter(OAuth2WeiBoWebsiteParameterNames.DISPLAY);
+			String forcelogin = request.getParameter(OAuth2WeiBoWebsiteParameterNames.FORCELOGIN);
+			String language = request.getParameter(OAuth2WeiBoWebsiteParameterNames.LANGUAGE);
 
 			String state = weiBoWebsiteService.stateGenerate(request, response, appid);
 			weiBoWebsiteService.storeBinding(request, response, appid, state, binding);

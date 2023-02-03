@@ -9,9 +9,9 @@ package org.springframework.security.oauth2.server.authorization.web.authenticat
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -25,7 +25,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.oauth2.core.OAuth2ErrorCodes;
 import org.springframework.security.oauth2.core.endpoint.OAuth2ParameterNames;
-import org.springframework.security.oauth2.core.endpoint.OAuth2WeiBoParameterNames;
+import org.springframework.security.oauth2.core.endpoint.OAuth2WeiBoWebsiteParameterNames;
 import org.springframework.security.oauth2.server.authorization.authentication.OAuth2AuthorizationCodeAuthenticationToken;
 import org.springframework.security.oauth2.server.authorization.authentication.OAuth2ClientCredentialsAuthenticationToken;
 import org.springframework.security.oauth2.server.authorization.authentication.OAuth2WeiBoWebsiteAuthenticationToken;
@@ -74,10 +74,10 @@ public class OAuth2WeiBoWebsiteAuthenticationConverter implements Authentication
 		}
 
 		// appid (REQUIRED)
-		String appid = parameters.getFirst(OAuth2WeiBoParameterNames.APPID);
+		String appid = parameters.getFirst(OAuth2WeiBoWebsiteParameterNames.APPID);
 
-		if (!StringUtils.hasText(appid) || parameters.get(OAuth2WeiBoParameterNames.APPID).size() != 1) {
-			OAuth2EndpointUtils.throwError(OAuth2ErrorCodes.INVALID_REQUEST, OAuth2WeiBoParameterNames.APPID,
+		if (!StringUtils.hasText(appid) || parameters.get(OAuth2WeiBoWebsiteParameterNames.APPID).size() != 1) {
+			OAuth2EndpointUtils.throwError(OAuth2ErrorCodes.INVALID_REQUEST, OAuth2WeiBoWebsiteParameterNames.APPID,
 					OAuth2WeiBoWebsiteEndpointUtils.AUTH_CODE2SESSION_URI);
 		}
 
@@ -95,22 +95,23 @@ public class OAuth2WeiBoWebsiteAuthenticationConverter implements Authentication
 		String state = parameters.getFirst(OAuth2ParameterNames.STATE);
 
 		// 是否绑定，需要使用者自己去拓展
-		String binding = request.getParameter(OAuth2WeiBoParameterNames.BINDING);
+		String binding = request.getParameter(OAuth2WeiBoWebsiteParameterNames.BINDING);
 
 		Map<String, Object> additionalParameters = new HashMap<>(4);
 		parameters.forEach((key, value) -> {
 			if (!key.equals(OAuth2ParameterNames.GRANT_TYPE) && !key.equals(OAuth2ParameterNames.CLIENT_ID)
 					&& !key.equals(OAuth2ParameterNames.CODE) && !key.equals(OAuth2ParameterNames.REDIRECT_URI)
-					&& !key.equals(OAuth2ParameterNames.CLIENT_SECRET) && !key.equals(OAuth2WeiBoParameterNames.APPID)
-					&& !key.equals(OAuth2ParameterNames.SCOPE) && !OAuth2WeiBoParameterNames.REMOTE_ADDRESS.equals(key)
-					&& !OAuth2WeiBoParameterNames.SESSION_ID.equals(key)
-					&& !OAuth2WeiBoParameterNames.BINDING.equals(key)) {
+					&& !key.equals(OAuth2ParameterNames.CLIENT_SECRET)
+					&& !key.equals(OAuth2WeiBoWebsiteParameterNames.APPID) && !key.equals(OAuth2ParameterNames.SCOPE)
+					&& !OAuth2WeiBoWebsiteParameterNames.REMOTE_ADDRESS.equals(key)
+					&& !OAuth2WeiBoWebsiteParameterNames.SESSION_ID.equals(key)
+					&& !OAuth2WeiBoWebsiteParameterNames.BINDING.equals(key)) {
 				additionalParameters.put(key, value.get(0));
 			}
 		});
 
-		String remoteAddress = request.getParameter(OAuth2WeiBoParameterNames.REMOTE_ADDRESS);
-		String sessionId = request.getParameter(OAuth2WeiBoParameterNames.SESSION_ID);
+		String remoteAddress = request.getParameter(OAuth2WeiBoWebsiteParameterNames.REMOTE_ADDRESS);
+		String sessionId = request.getParameter(OAuth2WeiBoWebsiteParameterNames.SESSION_ID);
 
 		return new OAuth2WeiBoWebsiteAuthenticationToken(clientPrincipal, additionalParameters, appid, redirectUri,
 				code, scope, remoteAddress, sessionId, state, binding);
