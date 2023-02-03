@@ -9,9 +9,9 @@ package org.springframework.security.oauth2.server.authorization.client;
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -240,6 +240,7 @@ public class InMemoryWeiBoWebsiteService implements WeiBoWebsiteService {
 	 * @param binding 是否绑定，需要使用者自己去拓展
 	 * @param accessTokenUrl 通过 code 换取网页授权 access_token 的 URL
 	 * @param userinfoUrl 通过 access_token 获取用户个人信息
+	 * @param redirectUri 重定向地址
 	 * @param remoteAddress 用户IP
 	 * @param sessionId SessionID
 	 * @return 返回 微博授权结果
