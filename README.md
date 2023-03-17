@@ -128,6 +128,8 @@
 - next
     - 支持 JDK 17
 
+## [使用文档](https://www.yuque.com/xuxiaowei-com-cn/xuxiaowei-cloud/third-party-login)
+
 ## 其他 [Spring Boot Starter 项目](https://gitee.com/xuxiaowei-com-cn/spring-boot-starter)
 
 ## 发布
@@ -176,11 +178,13 @@ git remote add gitlink https://gitlink.org.cn/xuxiaowei-com-cn/spring-boot-start
 
 ## 参考文档
 
+- [授权机制](https://open.weibo.com/wiki/%E6%8E%88%E6%9D%83%E6%9C%BA%E5%88%B6)
 - [OAuth2 授权第一步 authorize 接口，请求用户授权code](https://open.weibo.com/wiki/Oauth2/authorize)
 - [OAuth2 授权第二步 access_token 接口，用 code 换取授权 access_token，该步需在服务端完成](https://open.weibo.com/wiki/Oauth2/access_token)
 - [查询用户access_token的授权相关信息，包括授权时间，过期时间和scope权限。](https://open.weibo.com/wiki/Oauth2/get_token_info)
 - [授权回收接口，帮助开发者主动取消用户的授权。](https://open.weibo.com/wiki/Oauth2/revokeoauth2)
 - [用于OAuth1.0 access token 更换至 OAuth2.0 access token，帮助开发者使用新版接口和OAuth2.0时平滑迁移用户。](https://open.weibo.com/wiki/Oauth2/get_oauth2_token)
+- [微博API](https://open.weibo.com/wiki/%E5%BE%AE%E5%8D%9AAPI)
 
 ## 鸣谢
 
