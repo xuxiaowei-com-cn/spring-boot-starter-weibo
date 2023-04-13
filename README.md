@@ -81,11 +81,11 @@
   </a>
 
   <a target="_blank" href="https://gitee.com/xuxiaowei-com-cn/spring-boot-starter-weibo">
-    <img alt="微博weibo stars" src="https://gitee.com/xuxiaowei-com-cn/spring-boot-starter-weibo/badge/star.svg?theme=blue">
+    <img alt="码云Gitee stars" src="https://gitee.com/xuxiaowei-com-cn/spring-boot-starter-weibo/badge/star.svg?theme=blue">
   </a>
 
   <a target="_blank" href="https://gitee.com/xuxiaowei-com-cn/spring-boot-starter-weibo">
-    <img alt="微博weibo forks" src="https://gitee.com/xuxiaowei-com-cn/spring-boot-starter-weibo/badge/fork.svg?theme=blue">
+    <img alt="码云Gitee forks" src="https://gitee.com/xuxiaowei-com-cn/spring-boot-starter-weibo/badge/fork.svg?theme=blue">
   </a>
 
   <a target="_blank" href="https://gitlab.com/xuxiaowei-com-cn/spring-boot-starter-weibo">
