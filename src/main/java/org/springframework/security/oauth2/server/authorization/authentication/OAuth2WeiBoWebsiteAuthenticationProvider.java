@@ -79,7 +79,7 @@ public class OAuth2WeiBoWebsiteAuthenticationProvider implements AuthenticationP
 	 *
 	 */
 	public static final String ACCESS_TOKEN_URL = "https://api.weibo.com/oauth2/access_token"
-			+ "?client_id={client_id}&client_secret={client_secret}&code={code}&grant_type=authorization_code&redirect_uri={redirect_uri}";
+			+ "?code={code}&grant_type=authorization_code&redirect_uri={redirect_uri}";
 
 	/**
 	 *

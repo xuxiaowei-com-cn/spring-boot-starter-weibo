@@ -59,7 +59,7 @@ public class WeiBoWebsiteCodeHttpFilter extends HttpFilter {
 
 	public static final String PREFIX_URL = "/weibo/code";
 
-	public static final String TOKEN_URL = "/oauth2/token?grant_type={grant_type}&appid={appid}&code={code}&state={state}&client_id={client_id}&client_secret={client_secret}&remote_address={remote_address}&session_id={session_id}&binding={binding}&redirect_uri={redirect_uri}";
+	public static final String TOKEN_URL = "/oauth2/token?grant_type={grant_type}&appid={appid}&code={code}&state={state}&remote_address={remote_address}&session_id={session_id}&binding={binding}&redirect_uri={redirect_uri}";
 
 	private WeiBoWebsiteProperties weiBoWebsiteProperties;
 
@@ -119,14 +119,13 @@ public class WeiBoWebsiteCodeHttpFilter extends HttpFilter {
 			uriVariables.put(OAuth2ParameterNames.CODE, code);
 			uriVariables.put(OAuth2ParameterNames.STATE, state);
 			uriVariables.put(OAuth2ParameterNames.SCOPE, scope);
-			uriVariables.put(OAuth2ParameterNames.CLIENT_ID, clientId);
-			uriVariables.put(OAuth2ParameterNames.CLIENT_SECRET, clientSecret);
 			uriVariables.put(OAuth2WeiBoWebsiteParameterNames.REMOTE_ADDRESS, remoteHost);
 			uriVariables.put(OAuth2WeiBoWebsiteParameterNames.SESSION_ID, session == null ? "" : session.getId());
 			uriVariables.put(OAuth2WeiBoWebsiteParameterNames.BINDING, binding);
 
 			OAuth2AccessTokenResponse oauth2AccessTokenResponse = weiBoWebsiteService.getOAuth2AccessTokenResponse(
-					request, response, tokenUrlPrefix, TOKEN_URL, appid, redirectUriPrefix, uriVariables);
+					request, response, clientId, clientSecret, tokenUrlPrefix, TOKEN_URL, appid, redirectUriPrefix,
+					uriVariables);
 			if (oauth2AccessTokenResponse == null) {
 				return;
 			}

@@ -54,6 +54,8 @@ import org.springframework.security.oauth2.server.authorization.properties.WeiBo
 import org.springframework.security.oauth2.server.authorization.web.authentication.OAuth2WeiBoWebsiteEndpointUtils;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.util.Assert;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
 import org.springframework.util.StringUtils;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriUtils;
@@ -202,6 +204,8 @@ public class InMemoryWeiBoWebsiteService implements WeiBoWebsiteService {
 	 * 获取 OAuth 2.1 授权 Token（如果不想执行此方法后面的内容，可返回 null）
 	 * @param request 请求
 	 * @param response 响应
+	 * @param clientId 客户ID
+	 * @param clientSecret 客户凭证
 	 * @param tokenUrlPrefix 获取 Token URL 前缀
 	 * @param tokenUrl Token URL
 	 * @param uriVariables 参数
@@ -214,19 +218,21 @@ public class InMemoryWeiBoWebsiteService implements WeiBoWebsiteService {
 	@SuppressWarnings("AlibabaLowerCamelCaseVariableNaming")
 	@Override
 	public OAuth2AccessTokenResponse getOAuth2AccessTokenResponse(HttpServletRequest request,
-			HttpServletResponse response, String tokenUrlPrefix, String tokenUrl, String appid,
-			String redirectUriPrefix, @NonNull Map<String, String> uriVariables) throws OAuth2AuthenticationException {
+			HttpServletResponse response, String clientId, String clientSecret, String tokenUrlPrefix, String tokenUrl,
+			String appid, String redirectUriPrefix, @NonNull Map<String, String> uriVariables)
+			throws OAuth2AuthenticationException {
 
 		HttpHeaders httpHeaders = new HttpHeaders();
-		httpHeaders.setContentType(MediaType.APPLICATION_JSON);
-		HttpEntity<?> httpEntity = new HttpEntity<>(httpHeaders);
+		httpHeaders.setContentType(MediaType.MULTIPART_FORM_DATA);
 
+		MultiValueMap<String, String> multiValueMap = new LinkedMultiValueMap<>(8);
+		multiValueMap.put(OAuth2ParameterNames.CLIENT_ID, Collections.singletonList(clientId));
+		multiValueMap.put(OAuth2ParameterNames.CLIENT_SECRET, Collections.singletonList(clientSecret));
+
+		HttpEntity<MultiValueMap<String, String>> httpEntity = new HttpEntity<>(multiValueMap, httpHeaders);
 		RestTemplate restTemplate = new RestTemplate();
-
 		List<HttpMessageConverter<?>> messageConverters = restTemplate.getMessageConverters();
 		messageConverters.add(5, new OAuth2AccessTokenResponseHttpMessageConverter());
-
-		uriVariables.put(OAuth2ParameterNames.REDIRECT_URI, redirectUriPrefix + "/" + appid);
 
 		return restTemplate.postForObject(tokenUrlPrefix + tokenUrl, httpEntity, OAuth2AccessTokenResponse.class,
 				uriVariables);
