@@ -127,9 +127,9 @@ jobs:
           # 添加远端 FramaGit
           git remote add framagit git@framagit.org:$GITHUB_REPOSITORY.git
           # 拉取 main 分支
-          git pull --progress -v --no-rebase framagit main
+          git pull --progress -v --no-rebase framagit next
           # 推送 main 分支
-          git push --progress framagit main:main
+          git push --progress framagit next:next
 
   sync:
     name: Sync
